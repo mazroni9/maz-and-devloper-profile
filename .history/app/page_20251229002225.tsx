@@ -79,28 +79,28 @@ const developers: Person[] = [
   {
     name: "موسى الحلبي",
     role: "Backend & DevOps Engineer",
-    subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
+    subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء [cite: 5, 7]",
     image: "/team/mousa.jpg", 
-    tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"], [cite: 5, 7]
+    tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS "],
     stats: [
-      { label: "الخبرة", value: "+5 سنوات" }, 
-      { label: "القوة", value: "Scalability" }, [cite: 12]
-      { label: "الأسلوب", value: "Clean Architecture" }, [cite: 7]
+      { label: "المحور", value: "Infrastructure [cite: 14]" },
+      { label: "القوة", value: "Scalability [cite: 12]" },
+      { label: "الأسلوب", value: "Clean Code [cite: 15]" },
     ],
     accent: "emerald",
-    linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237", [cite: 3]
-    email: "mailto:mousahlp@gmail.com", [cite: 3]
+    linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237 [cite: 3]",
+    email: "mailto:mousahlp@gmail.com [cite: 3]",
   },
   {
     name: "ضياء الدين العزيز",
     role: "Full-Stack Developer & AI Innovator",
-    subtitle: "طالب بجامعة بجاية (الجزائر) • مطور حلول ذكاء اصطناعي",
+    subtitle: "طالب جامعي (المرحلة الثانية) • مطور حلول ذكاء اصطناعي",
     image: "/team/dhia.jpg", 
     tags: ["Next.js 15", "TypeScript", "Cloudflare", "AI Integration"],
     stats: [
       { label: "المحور", value: "Full-Stack" },
-      { label: "القوة", value: "AI Modern Stack" },
-      { label: "الدراسة", value: "سنة ثانية" },
+      { label: "القوة", value: "AI Platforms" },
+      { label: "الأسلوب", value: "Innovation" },
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhiaeddine-elaziz/",
@@ -111,11 +111,11 @@ const developers: Person[] = [
     role: "مطور لارافيل - خبير أنظمة المزادات",
     subtitle: "مبرمج قسم المزادات • دعم تقني حاسم في وقت حرج",
     image: "/team/phoenix-placeholder.png", 
-    tags: ["Laravel", "PHP", "Auction Engine", "Problem Solving"],
+    tags: ["Laravel", "PHP", "Auction Logic", "Backend"],
     stats: [
       { label: "المحور", value: "Backend" },
       { label: "القوة", value: "Auctions" },
-      { label: "الأسلوب", value: "Critical Support" },
+      { label: "الأسلوب", value: "Support" },
     ],
     accent: "emerald",
   },
@@ -195,8 +195,20 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
             </div>
           )}
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a href={person.linkedin || "#"} target="_blank" rel="noopener noreferrer" className={cx("rounded-2xl px-4 py-2 text-sm font-semibold transition inline-block text-center shadow-sm", primaryBtn)}>عرض الملف</a>
-            <a href={person.email || "#"} className={cx("rounded-2xl px-4 py-2 text-sm font-semibold transition inline-block text-center shadow-sm", secondaryBtn)}>تواصل</a>
+            <a 
+              href={person.linkedin || "#"} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={cx("rounded-2xl px-4 py-2 text-sm font-semibold transition inline-block text-center", primaryBtn)}
+            >
+              عرض الملف
+            </a>
+            <a 
+              href={person.email || "#"} 
+              className={cx("rounded-2xl px-4 py-2 text-sm font-semibold transition inline-block text-center", secondaryBtn)}
+            >
+              تواصل
+            </a>
             <div className="mr-auto hidden items-center gap-2 text-xs text-white/55 sm:flex">
               <span className={cx("h-1.5 w-1.5 rounded-full", isFounder ? "bg-[#D4AF37]" : "bg-[#10B981]")} />
               {isFounder ? "تنفيذ بقيادة المؤسس" : "جاهز للتوسع"}
@@ -231,6 +243,7 @@ export default function TeamShowcaseSection() {
           <div className="text-xs text-white/60">مرر/اضغط لعرض البطاقة</div>
         </div>
 
+        {/* شبكة متوازنة لـ 6 مطورين (3 في كل صف) */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {developers.map((p) => (
             <PlayerCard key={p.name} person={p} variant="dev" />
@@ -238,14 +251,7 @@ export default function TeamShowcaseSection() {
         </div>
 
         <div className="mt-10 text-center">
-          {/* ✅ تم الربط بملف المعمارية في الـ public */}
-          <a 
-            href="/architecture-preview.html" 
-            target="_blank"
-            className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 transition-colors shadow-lg backdrop-blur-sm"
-          >
-            📊 عرض مخطط المعمارية
-          </a>
+          <a href="/architecture" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 transition-colors">📊 عرض مخطط المعمارية</a>
         </div>
       </div>
     </section>

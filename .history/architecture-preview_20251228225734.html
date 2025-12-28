@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مخطط المعمارية - DASM-e</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1565C0;
+            margin-bottom: 30px;
+        }
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مخطط المعمارية - DASM-e Platform</h1>
+        <div class="mermaid">
+flowchart TB
+    %% تعريف الأنماط
+    classDef userStyle fill:#E3F2FD,stroke:#1565C0,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef frontendStyle fill:#BBDEFB,stroke:#1976D2,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef gatewayStyle fill:#90CAF9,stroke:#1565C0,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef coreStyle fill:#C8E6C9,stroke:#2E7D32,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef domainStyle fill:#FFE0B2,stroke:#EF6C00,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef busStyle fill:#E1BEE7,stroke:#7B1FA2,stroke-width:2px,color:#000,font-weight:bold,font-size:12px
+    classDef dbStyle fill:#ECEFF1,stroke:#455A64,stroke-width:2px,stroke-dasharray: 3 3,font-size:11px
+
+    %% الطبقة 1: المدخل
+    U([👤 المستخدمون<br/>تجار - أفراد - إدارة]):::userStyle
+    F[💻 واجهة الويب<br/>Next.js / Vercel]:::frontendStyle
+    G[🛡️ بوابة الخدمات<br/>API Gateway]:::gatewayStyle
+    
+    U --> F
+    F --> G
+    
+    %% الطبقة 2: الخدمات الأساسية
+    ID[🆔 الهوية<br/>Identity]:::coreStyle
+    AU[🔨 المزادات<br/>Auctions]:::coreStyle
+    LS[📋 العروض<br/>Listings]:::coreStyle
+    WL[💰 المحفظة<br/>Wallet]:::coreStyle
+    PY[💳 المدفوعات<br/>Payments]:::coreStyle
+    
+    G --> ID
+    G --> AU
+    G --> LS
+    G --> WL
+    G --> PY
+    
+    %% الطبقة 3: الخدمات المتخصصة
+    RT[⚡ المزايدة اللحظية<br/>Realtime]:::domainStyle
+    FL[🚛 الأسطول<br/>Fleet]:::domainStyle
+    NT[🔔 الإشعارات<br/>Notifications]:::domainStyle
+    RP[📊 التقارير<br/>Analytics]:::domainStyle
+    AI[🤖 الذكاء الاصطناعي<br/>AI Insights]:::domainStyle
+    RF[🚨 الحماية<br/>Fraud & Risk]:::domainStyle
+    
+    AU --> RT
+    F -.-> RT
+    LS --> FL
+    AU --> NT
+    PY --> NT
+    FL --> NT
+    AU --> RF
+    PY --> RF
+    
+    %% حافلة الرسائل
+    MB{{📨 حافلة الرسائل<br/>Message Bus<br/>Kafka / RabbitMQ}}:::busStyle
+    
+    AU ==> MB
+    RT ==> MB
+    WL ==> MB
+    PY ==> MB
+    FL ==> MB
+    NT ==> MB
+    RF ==> MB
+    
+    MB ==> RP
+    MB ==> AI
+    
+    %% قواعد البيانات
+    DB_ID[(DB الهوية)]:::dbStyle
+    DB_AU[(DB المزادات)]:::dbStyle
+    DB_LS[(DB العروض)]:::dbStyle
+    DB_WL[(DB المحفظة)]:::dbStyle
+    DB_PY[(DB المدفوعات)]:::dbStyle
+    DB_FL[(DB الأسطول)]:::dbStyle
+    DB_RP[(DB التقارير)]:::dbStyle
+    
+    ID --- DB_ID
+    AU --- DB_AU
+    LS --- DB_LS
+    WL --- DB_WL
+    PY --- DB_PY
+    FL --- DB_FL
+    RP --- DB_RP
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+            <h2 style="color: #333; margin-bottom: 15px;">مفتاح الألوان:</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 30px; height: 30px; background: #E3F2FD; border: 2px solid #1565C0; border-radius: 4px;"></div>
+                    <span>واجهة المستخدم</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 30px; height: 30px; background: #C8E6C9; border: 2px solid #2E7D32; border-radius: 4px;"></div>
+                    <span>الخدمات الأساسية</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 30px; height: 30px; background: #FFE0B2; border: 2px solid #EF6C00; border-radius: 4px;"></div>
+                    <span>الخدمات المتخصصة</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 30px; height: 30px; background: #E1BEE7; border: 2px solid #7B1FA2; border-radius: 4px;"></div>
+                    <span>حافلة الرسائل</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 30px; height: 30px; background: #ECEFF1; border: 2px dashed #455A64; border-radius: 4px;"></div>
+                    <span>قواعد البيانات</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                fontSize: '12px',
+                fontFamily: 'Arial, sans-serif',
+                lineWidth: '2px',
+                primaryColor: '#1565C0',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#0D47A1',
+                lineColor: '#333',
+                secondaryColor: '#2E7D32',
+                tertiaryColor: '#EF6C00',
+            },
+            flowchart: {
+                nodeSpacing: 50,
+                rankSpacing: 80,
+                curve: 'basis',
+                padding: 10,
+            },
+        });
+    </script>
+</body>
+</html>
+
