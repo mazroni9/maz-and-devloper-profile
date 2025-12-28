@@ -1,3 +1,4 @@
+```tsx
 // TeamShowcaseSection.tsx
 // React + Tailwind (مناسب لـ Next.js)
 // ✅ تعديلات نهائية حسب النقاش:
@@ -306,16 +307,9 @@ export default function TeamShowcaseSection() {
           ))}
         </div>
 
-        {/* رابط صفحة المخطط المعماري */}
-        <div className="mt-10 text-center">
-          <a
-            href="/architecture"
-            className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-6 py-3 text-sm font-semibold text-white hover:bg-white/20 transition-colors"
-          >
-            📊 عرض مخطط المعمارية
-          </a>
-        </div>
+        {/* ✅ إزالة Footer note لأنها كانت “زائدة” وتبدو كتعليق تجريبي */}
       </div>
     </section>
   );
 }
+```
