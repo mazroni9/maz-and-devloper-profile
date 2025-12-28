@@ -1,5 +1,5 @@
 // TeamShowcaseSection.tsx
-'use client'; // ✅ ضروري جداً لعمل الأزرار والتفاعلية على Vercel
+'use client'; 
 
 import React from "react";
 
@@ -24,9 +24,9 @@ const BRAND = {
 
 const founder: Person = {
   name: "محمد أحمد الزهراني",
-  role: "المؤسس والرئيس التنفيذي — DASM-e",
+  role: "المؤسس والرئيس التنفيذي — DASM-e ",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
-  // ✅ تم التحديث للمسار الجديد بعد تغيير الاسم ونقله لمجلد team
+  // ✅ المسار مطابق لصورك في المجلد الجديد
   image: "/team/founder.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
@@ -65,18 +65,17 @@ const developers: Person[] = [
   },
   {
     name: "موسى الحلبي",
-    role: "Backend Developer | DevOps Engineer ",
+    role: "Backend Developer | DevOps Engineer",
     subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
     image: "/team/موسى الحلبي.jpeg", 
     tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"],
     stats: [
-      { label: "الخبرة", value: "+5 سنوات" },
+      { label: "الخبرة", value: "أكثر من 5 سنوات" },
       { label: "القوة", value: "Scalability" },
       { label: "الأسلوب", value: "Clean Arch" },
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
-    // ✅ الملف في الـ public مباشرة حسب الصورة image_280d60.png
     cvUrl: "/Mousa AlHalabi.pdf", 
   },
   {
@@ -92,7 +91,6 @@ const developers: Person[] = [
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/",
-    // ✅ الملف في الـ public مباشرة حسب الصورة image_280d60.png
     cvUrl: "/diaaalazizResume.pdf", 
   },
   {
@@ -119,10 +117,14 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
       <div className="relative z-10 grid gap-6 md:grid-cols-[180px_1fr]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
           <img 
-            // ✅ استخدام encodeURI لضمان قراءة الأسماء العربية للملفات
             src={encodeURI(person.image)} 
             alt={person.name} 
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
+            // ✅ إضافة ميزة الصورة الاحتياطية لمنع ظهور "الشكل الغريب"
+            onError={(e) => {
+               const target = e.target as HTMLImageElement;
+               target.src = "/team/جاسم الحجاب.jpeg"; // سيتم عرض الفينيقي في حال فشل تحميل صورتك
+            }}
           />
         </div>
 
