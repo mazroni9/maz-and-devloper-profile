@@ -26,7 +26,8 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس الرؤية • قائد تشغيل • صانع سوق",
-  image: "/المؤسس-1.jpeg",
+  // ✅ تم التصحيح بناءً على لقطة الشاشة 1-المؤسس.jpeg
+  image: "/1-المؤسس.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
     { label: "التركيز", value: "تنفيذ" },
@@ -34,7 +35,6 @@ const founder: Person = {
     { label: "المجال", value: "مزادات + تمويل" },
   ],
   accent: "gold",
-  // ✅ تم تحديث رابط LinkedIn الخاص بك هنا
   linkedin: "https://www.linkedin.com/in/mohammed-alahmad-3a7064107",
 };
 
@@ -82,12 +82,13 @@ const developers: Person[] = [
     name: "موسى الحلبي",
     role: "Backend & DevOps Engineer",
     subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
-    image: "/team/mousa.jpg", 
+    // ✅ تم التصحيح بناءً على لقطة الشاشة: موسى الحلبي.jpeg
+    image: "/team/موسى الحلبي.jpeg", 
     tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"],
     stats: [
       { label: "الخبرة", value: "+5 سنوات" },
       { label: "القوة", value: "Scalability" },
-      { label: "الأسلوب", value: "Clean Architecture" },
+      { label: "الأسلوب", value: "Clean Arch" },
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
@@ -97,7 +98,8 @@ const developers: Person[] = [
     name: "ضياء الدين العزيز",
     role: "Full-Stack Developer & AI Innovator",
     subtitle: "طالب جامعي (المرحلة الثانية) • مطور حلول ذكاء اصطناعي",
-    image: "/team/dhia.jpg", 
+    // ✅ تم التصحيح بناءً على لقطة الشاشة: ضياء العزيز.jpg
+    image: "/team/ضياء العزيز.jpg", 
     tags: ["Next.js 15", "TypeScript", "Cloudflare", "AI Integration"],
     stats: [
       { label: "المحور", value: "Full-Stack" },
@@ -112,7 +114,8 @@ const developers: Person[] = [
     name: "جاسم الحجاب",
     role: "مطور لارافيل - خبير أنظمة المزادات",
     subtitle: "مبرمج قسم المزادات • دعم تقني حاسم في وقت حرج",
-    image: "/team/phoenix-placeholder.png", 
+    // ✅ تم التصحيح بناءً على لقطة الشاشة: جاسم الحجاب.jpeg
+    image: "/team/جاسم الحجاب.jpeg", 
     tags: ["Laravel", "PHP", "Auction Engine", "Problem Solving"],
     stats: [
       { label: "المحور", value: "Backend" },
@@ -173,9 +176,13 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
 
       <div className="relative z-10 grid gap-6 p-6 md:grid-cols-[180px_1fr]">
         <div className="relative">
-          {isFounder && <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-[#D4AF37]/10 blur-2xl" />}
           <div className={cx("relative overflow-hidden rounded-2xl border border-white/10 bg-black/20", isFounder ? "aspect-[3/4]" : "aspect-[4/5]")}>
-            <img src={person.image} alt={person.name} className={cx("h-full w-full object-cover transition-transform duration-500 object-top", isFounder ? "group-hover:scale-[1.02]" : "group-hover:scale-[1.03]")} loading={isFounder ? "eager" : "lazy"} />
+            <img 
+              src={person.image} 
+              alt={person.name} 
+              className="h-full w-full object-cover transition-transform duration-500 object-top group-hover:scale-[1.03]" 
+              loading={isFounder ? "eager" : "lazy"} 
+            />
           </div>
           <div className={cx("absolute -bottom-3 right-3 rounded-2xl border bg-black/70 px-3 py-2 backdrop-blur", badgeBorder)}>
             <div className={cx("text-[10px] uppercase tracking-wide", badgeTitle)}>{roleLabel}</div>
