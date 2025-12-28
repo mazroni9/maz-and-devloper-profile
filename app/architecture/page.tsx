@@ -11,53 +11,71 @@ export default function ArchitecturePage() {
   useEffect(() => {
     // تحميل مكتبة Mermaid
     const loadMermaid = async () => {
-      if (typeof window !== 'undefined' && diagramRef.current) {
-        try {
-          const mermaid = (await import('mermaid')).default;
-          mermaidRef.current = mermaid;
-          
-          mermaid.initialize({
-            startOnLoad: false,
-            theme: 'base',
-            themeVariables: {
-              fontSize: '12px',
-              fontFamily: 'Arial, sans-serif',
-              lineWidth: '2px',
-              primaryColor: '#1565C0',
-              primaryTextColor: '#fff',
-              primaryBorderColor: '#0D47A1',
-              lineColor: '#333',
-              secondaryColor: '#2E7D32',
-              tertiaryColor: '#EF6C00',
-            },
-            flowchart: {
-              nodeSpacing: 50,
-              rankSpacing: 80,
-              curve: 'basis',
-              padding: 10,
-            },
-          });
+      if (typeof window === 'undefined') return;
+      
+      try {
+        const mermaid = (await import('mermaid')).default;
+        mermaidRef.current = mermaid;
+        
+        mermaid.initialize({
+          startOnLoad: false,
+          theme: 'base',
+          themeVariables: {
+            fontSize: '12px',
+            fontFamily: 'Arial, sans-serif',
+            lineWidth: '2px',
+            primaryColor: '#1565C0',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#0D47A1',
+            lineColor: '#333',
+            secondaryColor: '#2E7D32',
+            tertiaryColor: '#EF6C00',
+          },
+          flowchart: {
+            nodeSpacing: 50,
+            rankSpacing: 80,
+            curve: 'basis',
+            padding: 10,
+          },
+        });
 
-          // رسم المخطط
-          const id = 'mermaid-diagram-' + Date.now();
-          const graphDefinition = mermaidDiagram;
-          
-          mermaid.render(id, graphDefinition).then((result: any) => {
-            if (diagramRef.current) {
-              diagramRef.current.innerHTML = result.svg;
+        // انتظار حتى يكون diagramRef جاهز
+        const checkAndRender = () => {
+          if (diagramRef.current) {
+            const id = 'mermaid-diagram-' + Date.now();
+            const graphDefinition = mermaidDiagram;
+            
+            mermaid.render(id, graphDefinition).then((result: any) => {
+              if (diagramRef.current) {
+                diagramRef.current.innerHTML = result.svg;
+                setIsLoading(false);
+              }
+            }).catch((error: any) => {
+              console.error('Error rendering diagram:', error);
               setIsLoading(false);
-            }
-          }).catch((error: any) => {
-            console.error('Error rendering diagram:', error);
-            setIsLoading(false);
-          });
-        } catch (error) {
-          console.error('Error loading mermaid:', error);
-          setIsLoading(false);
+              // عرض رسالة خطأ للمستخدم
+              if (diagramRef.current) {
+                diagramRef.current.innerHTML = '<div class="text-center p-8 text-red-600">حدث خطأ في تحميل المخطط. يرجى تحديث الصفحة.</div>';
+              }
+            });
+          } else {
+            // إعادة المحاولة بعد قليل
+            setTimeout(checkAndRender, 100);
+          }
+        };
+        
+        checkAndRender();
+      } catch (error) {
+        console.error('Error loading mermaid:', error);
+        setIsLoading(false);
+        if (diagramRef.current) {
+          diagramRef.current.innerHTML = '<div class="text-center p-8 text-red-600">حدث خطأ في تحميل المكتبة. يرجى تحديث الصفحة.</div>';
         }
       }
     };
-    loadMermaid();
+    
+    // تأخير بسيط لضمان تحميل DOM
+    setTimeout(loadMermaid, 100);
   }, []);
 
   const handlePrint = () => {
