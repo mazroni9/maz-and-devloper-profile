@@ -1,0 +1,51 @@
+═══════════════════════════════════════════════════════════
+  دليل النشر السريع على GitHub و Vercel
+═══════════════════════════════════════════════════════════
+
+✅ تم إعداد المشروع بنجاح!
+✅ تم تهيئة Git وإجراء أول commit
+
+═══════════════════════════════════════════════════════════
+  الخطوات التالية:
+═══════════════════════════════════════════════════════════
+
+1️⃣  إنشاء مستودع على GitHub:
+   - اذهب إلى: https://github.com/new
+   - اسم المستودع: dasm-e-team-profile (أو أي اسم تريده)
+   - اختر Public أو Private
+   - ⚠️ لا تضع علامة على "Add README" أو "Add .gitignore"
+   - اضغط "Create repository"
+
+2️⃣  ربط المشروع بـ GitHub:
+   افتح PowerShell في مجلد المشروع واكتب:
+
+   git remote add origin https://github.com/YOUR_USERNAME/dasm-e-team-profile.git
+   git branch -M main
+   git push -u origin main
+
+   ⚠️ استبدل YOUR_USERNAME باسم المستخدم الخاص بك على GitHub
+
+3️⃣  النشر على Vercel (تلقائي):
+   - اذهب إلى: https://vercel.com
+   - اضغط "Sign Up" واختر "Continue with GitHub"
+   - اضغط "Add New Project"
+   - اختر المستودع dasm-e-team-profile
+   - اضغط "Deploy"
+   - ✅ جاهز! Vercel سينشر تلقائياً عند كل push
+
+═══════════════════════════════════════════════════════════
+  ملاحظات مهمة:
+═══════════════════════════════════════════════════════════
+
+- عند push، قد يطلب منك GitHub اسم المستخدم وكلمة المرور
+- استخدم Personal Access Token بدلاً من كلمة المرور:
+  → https://github.com/settings/tokens
+  → Generate new token (classic)
+  → امنحه صلاحية: repo
+
+- بعد ربط Vercel، كل push جديد = نشر تلقائي! 🚀
+
+═══════════════════════════════════════════════════════════
+
+للتفاصيل الكاملة، راجع ملف: DEPLOY.md
+
