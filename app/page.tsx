@@ -1,4 +1,3 @@
-```tsx
 // TeamShowcaseSection.tsx
 // React + Tailwind (مناسب لـ Next.js)
 // ✅ تعديلات نهائية حسب النقاش:
@@ -312,4 +311,3 @@ export default function TeamShowcaseSection() {
     </section>
   );
 }
-```
