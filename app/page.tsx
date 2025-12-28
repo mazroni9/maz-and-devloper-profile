@@ -172,17 +172,15 @@ function PlayerCard({
             <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-[#D4AF37]/10 blur-2xl" />
           ) : null}
 
-          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
+          <div className={cx(
+            "relative overflow-hidden rounded-2xl border border-white/10 bg-black/20",
+            isFounder ? "aspect-[3/4]" : "aspect-[4/5]"
+          )}>
             <img
               src={person.image}
               alt={person.name}
-              className={cx(
-                "h-full w-full transition-transform duration-500 group-hover:scale-[1.04]",
-                isFounder 
-                  ? "object-cover" 
-                  : "object-cover"
-              )}
-              style={isFounder ? { objectPosition: "center 25%" } : undefined}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              style={isFounder ? { objectPosition: "center 20%" } : undefined}
               loading="lazy"
             />
             {/* Soft vignette */}
