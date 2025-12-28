@@ -26,7 +26,7 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس الرؤية • قائد تشغيل • صانع سوق",
-  // ✅ تم التصحيح بناءً على لقطة الشاشة 1-المؤسس.jpeg
+  // ✅ تم التصحيح بناءً على صورة المجلد: 1-المؤسس.jpeg
   image: "/1-المؤسس.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
@@ -167,7 +167,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
 
   return (
     <article className={cx("group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 shadow-[0_20px_80px_rgba(0,0,0,0.45)] transition-transform duration-300 hover:-translate-y-0.5")}>
-      <div className={cx("pointer-events-none absolute -inset-24 opacity-70 blur-2xl", isFounder ? "bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.22),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(16,185,129,0.14),transparent_45%)]" : "bg-[radial-gradient(circle_at_20%_10%,rgba(11,58,99,0.20),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(16,185,129,0.16),transparent_45%)]")} />
+      <div className={cx("pointer-events-none absolute -inset-24 opacity-70 blur-2xl", isFounder ? "bg-[radial-gradient(circle_at_20%_10%,rgba(212,175,55,0.22),transparent_45%)]" : "bg-[radial-gradient(circle_at_20%_10%,rgba(11,58,99,0.20),transparent_45%)]")} />
       
       <div className="absolute right-5 top-5 z-10 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/45 px-3 py-1 text-xs text-white/80 backdrop-blur">
         <AccentDot accent={accent} />
@@ -176,9 +176,10 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
 
       <div className="relative z-10 grid gap-6 p-6 md:grid-cols-[180px_1fr]">
         <div className="relative">
+          {isFounder && <div className="pointer-events-none absolute -inset-6 rounded-3xl bg-[#D4AF37]/10 blur-2xl" />}
           <div className={cx("relative overflow-hidden rounded-2xl border border-white/10 bg-black/20", isFounder ? "aspect-[3/4]" : "aspect-[4/5]")}>
             <img 
-              src={person.image} 
+              src={encodeURI(person.image)} // ✅ لضمان قراءة الأسماء العربية للملفات
               alt={person.name} 
               className="h-full w-full object-cover transition-transform duration-500 object-top group-hover:scale-[1.03]" 
               loading={isFounder ? "eager" : "lazy"} 
@@ -240,6 +241,7 @@ export default function TeamShowcaseSection() {
           <div className="text-xs text-white/60">مرر/اضغط لعرض البطاقة</div>
         </div>
 
+        {/* توزيع الشبكة لـ 6 مطورين (3 في كل صف) */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {developers.map((p) => (
             <PlayerCard key={p.name} person={p} variant="dev" />
