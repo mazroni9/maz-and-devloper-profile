@@ -67,14 +67,14 @@ const developers: Person[] = [
   },
   {
     name: "موسى الحلبي",
-    role: "Backend Developer | DevOps Engineer", [cite: 61]
-    subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء", [cite: 66, 72]
+    role: "Backend Developer | DevOps Engineer",
+    subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
     image: "/team/موسى الحلبي.jpeg", 
-    tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"], [cite: 96, 100, 101]
+    tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"],
     stats: [
       { label: "الخبرة", value: "أكثر من 5 سنوات" }, 
-      { label: "القوة", value: "Scalability" }, [cite: 71]
-      { label: "الأسلوب", value: "Clean Arch" }, [cite: 66]
+      { label: "القوة", value: "Scalability" },
+      { label: "الأسلوب", value: "Clean Arch" },
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237", 
@@ -82,14 +82,14 @@ const developers: Person[] = [
   },
   {
     name: "ضياء الدين العزيز",
-    role: "Full-Stack Developer", [cite: 14, 19, 24]
-    subtitle: "طالب هندسة كمبيوتر • حلول ذكاء اصطناعي", [cite: 48, 12]
+    role: "Full-Stack Developer",
+    subtitle: "طالب هندسة كمبيوتر • حلول ذكاء اصطناعي",
     image: "/team/ضياء العزيز.jpg", 
-    tags: ["Next.js", "TypeScript", "Cloudflare", "AI Integration"], [cite: 9, 11, 12]
+    tags: ["Next.js", "TypeScript", "Cloudflare", "AI Integration"],
     stats: [
-      { label: "المحور", value: "Full-Stack" }, 
-      { label: "القوة", value: "AI/ML" }, [cite: 12]
-      { label: "الترتيب", value: "أعلى 15% بجامعته" }, [cite: 50]
+      { label: "المحور", value: "Full-Stack" },
+      { label: "القوة", value: "AI/ML" },
+      { label: "الترتيب", value: "أعلى 15% بجامعته" },
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/", 
