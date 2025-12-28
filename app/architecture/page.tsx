@@ -1,21 +1,27 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 
 export default function ArchitecturePage() {
   const diagramContainerRef = useRef<HTMLDivElement>(null);
   const diagramRef = useRef<HTMLDivElement>(null);
-  const mermaidRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // تحميل مكتبة Mermaid
+    let isMounted = true;
+    
     const loadMermaid = async () => {
       if (typeof window === 'undefined') return;
       
       try {
+        // انتظار حتى يكون DOM جاهز
+        await new Promise(resolve => setTimeout(resolve, 200));
+        
+        if (!isMounted || !diagramRef.current) return;
+        
         const mermaid = (await import('mermaid')).default;
-        mermaidRef.current = mermaid;
         
         mermaid.initialize({
           startOnLoad: false,
@@ -39,43 +45,37 @@ export default function ArchitecturePage() {
           },
         });
 
-        // انتظار حتى يكون diagramRef جاهز
-        const checkAndRender = () => {
-          if (diagramRef.current) {
-            const id = 'mermaid-diagram-' + Date.now();
-            const graphDefinition = mermaidDiagram;
-            
-            mermaid.render(id, graphDefinition).then((result: any) => {
-              if (diagramRef.current) {
-                diagramRef.current.innerHTML = result.svg;
-                setIsLoading(false);
-              }
-            }).catch((error: any) => {
-              console.error('Error rendering diagram:', error);
-              setIsLoading(false);
-              // عرض رسالة خطأ للمستخدم
-              if (diagramRef.current) {
-                diagramRef.current.innerHTML = '<div class="text-center p-8 text-red-600">حدث خطأ في تحميل المخطط. يرجى تحديث الصفحة.</div>';
-              }
-            });
-          } else {
-            // إعادة المحاولة بعد قليل
-            setTimeout(checkAndRender, 100);
-          }
-        };
+        const id = 'mermaid-diagram-' + Date.now();
         
-        checkAndRender();
-      } catch (error) {
-        console.error('Error loading mermaid:', error);
-        setIsLoading(false);
-        if (diagramRef.current) {
-          diagramRef.current.innerHTML = '<div class="text-center p-8 text-red-600">حدث خطأ في تحميل المكتبة. يرجى تحديث الصفحة.</div>';
+        try {
+          const result = await mermaid.render(id, mermaidDiagram);
+          
+          if (isMounted && diagramRef.current) {
+            diagramRef.current.innerHTML = result.svg;
+            setIsLoading(false);
+            setError(null);
+          }
+        } catch (renderError: any) {
+          console.error('Mermaid render error:', renderError);
+          if (isMounted) {
+            setIsLoading(false);
+            setError('حدث خطأ في رسم المخطط: ' + (renderError.message || 'خطأ غير معروف'));
+          }
+        }
+      } catch (importError: any) {
+        console.error('Error loading mermaid:', importError);
+        if (isMounted) {
+          setIsLoading(false);
+          setError('حدث خطأ في تحميل المكتبة: ' + (importError.message || 'خطأ غير معروف'));
         }
       }
     };
     
-    // تأخير بسيط لضمان تحميل DOM
-    setTimeout(loadMermaid, 100);
+    loadMermaid();
+    
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handlePrint = () => {
@@ -254,6 +254,19 @@ flowchart TB
               <div className="text-center">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
                 <p className="text-gray-600">جاري تحميل المخطط...</p>
+              </div>
+            </div>
+          ) : error ? (
+            <div className="flex items-center justify-center h-96">
+              <div className="text-center p-8">
+                <div className="text-red-600 text-lg font-semibold mb-2">⚠️ خطأ</div>
+                <p className="text-gray-700 mb-4">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                >
+                  إعادة تحميل الصفحة
+                </button>
               </div>
             </div>
           ) : (
