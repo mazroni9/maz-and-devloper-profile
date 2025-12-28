@@ -176,7 +176,13 @@ function PlayerCard({
             <img
               src={person.image}
               alt={person.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className={cx(
+                "h-full w-full transition-transform duration-500 group-hover:scale-[1.04]",
+                isFounder 
+                  ? "object-cover" 
+                  : "object-cover"
+              )}
+              style={isFounder ? { objectPosition: "center 25%" } : undefined}
               loading="lazy"
             />
             {/* Soft vignette */}
@@ -273,11 +279,6 @@ export default function TeamShowcaseSection() {
           <h2 className="text-2xl font-extrabold md:text-4xl">
             المؤسس والفريق التقني الذي حوّل الفكرة إلى منصة تعمل
           </h2>
-
-          <p className="max-w-3xl text-sm text-white/70 md:text-base">
-            بطاقات تفاعلية بأسلوب "Player Cards": حضور قيادي للمؤسس + بطاقات تنفيذ للفريق البرمجي
-            (Backend/Frontend/Lead) — بألوان DASM-e الرسمية (أزرق + أخضر + ذهبي فينيقي).
-          </p>
         </div>
 
         {/* Founder */}
