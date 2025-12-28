@@ -1,3 +1,5 @@
+'use client';
+
 // TeamShowcaseSection.tsx
 // React + Tailwind (مناسب لـ Next.js)
 
