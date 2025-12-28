@@ -1,6 +1,5 @@
 // TeamShowcaseSection.tsx
-// ✅ 'use client' ضرورية جداً لحل خطأ Vercel Build
-'use client'; 
+'use client'; // ✅ ضروري جداً لعمل الأزرار والتفاعلية على Vercel
 
 import React from "react";
 
@@ -27,8 +26,8 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
-  // ✅ تم التصحيح بناءً على الصورة image_280d60.png
-  image: "/1-المؤسس.jpeg", 
+  // ✅ تم التحديث للمسار الجديد بعد تغيير الاسم ونقله لمجلد team
+  image: "/team/founder.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
     { label: "التركيز", value: "تنفيذ" },
@@ -66,18 +65,18 @@ const developers: Person[] = [
   },
   {
     name: "موسى الحلبي",
-    role: "Backend Developer | DevOps Engineer",
+    role: "Backend Developer | DevOps Engineer ",
     subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
     image: "/team/موسى الحلبي.jpeg", 
     tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"],
     stats: [
-      { label: "الخبرة", value: "أكثر من 5 سنوات" },
+      { label: "الخبرة", value: "+5 سنوات" },
       { label: "القوة", value: "Scalability" },
       { label: "الأسلوب", value: "Clean Arch" },
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
-    // ✅ تم التصحيح: الملف في الـ public مباشرة حسب الصورة image_280d60.png
+    // ✅ الملف في الـ public مباشرة حسب الصورة image_280d60.png
     cvUrl: "/Mousa AlHalabi.pdf", 
   },
   {
@@ -93,7 +92,7 @@ const developers: Person[] = [
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/",
-    // ✅ تم التصحيح: الملف في الـ public مباشرة حسب الصورة image_280d60.png
+    // ✅ الملف في الـ public مباشرة حسب الصورة image_280d60.png
     cvUrl: "/diaaalazizResume.pdf", 
   },
   {
@@ -120,6 +119,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
       <div className="relative z-10 grid gap-6 md:grid-cols-[180px_1fr]">
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
           <img 
+            // ✅ استخدام encodeURI لضمان قراءة الأسماء العربية للملفات
             src={encodeURI(person.image)} 
             alt={person.name} 
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
@@ -158,9 +158,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
                 "rounded-xl px-4 py-2 text-xs font-bold transition-all shadow-sm",
                 person.cvUrl ? primaryBtn : "bg-white/5 text-white/20 cursor-not-allowed"
               )}
-              onClick={(e) => {
-                if (!person.cvUrl) e.preventDefault();
-              }}
+              onClick={(e) => { if (!person.cvUrl) e.preventDefault(); }}
             >
               السيرة الذاتية
             </a>
@@ -172,9 +170,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
                 "rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition-all",
                 person.linkedin ? "bg-white/5 text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"
               )}
-              onClick={(e) => {
-                if (!person.linkedin) e.preventDefault();
-              }}
+              onClick={(e) => { if (!person.linkedin) e.preventDefault(); }}
             >
               LinkedIn
             </a>
@@ -189,6 +185,7 @@ export default function TeamShowcaseSection() {
   return (
     <section dir="rtl" className="relative py-24 text-white" style={{ backgroundColor: BRAND.dark }}>
       <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:40px_40px]" />
+      
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mb-16 text-center">
            <h2 className="text-3xl font-extrabold md:text-5xl lg:text-6xl tracking-tight">المؤسس والفريق التقني</h2>
