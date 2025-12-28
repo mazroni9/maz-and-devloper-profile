@@ -1,5 +1,5 @@
 // TeamShowcaseSection.tsx
-// ✅ إضافة السطر التالي لحل مشكلة Vercel:
+// ✅ 'use client' ضرورية جداً لحل خطأ Vercel Build
 'use client'; 
 
 import React from "react";
@@ -27,6 +27,7 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
+  // ✅ تم التصحيح بناءً على الصورة image_280d60.png
   image: "/1-المؤسس.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
@@ -76,7 +77,8 @@ const developers: Person[] = [
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
-    cvUrl: "/cv/Mousa AlHalabi.pdf",
+    // ✅ تم التصحيح: الملف في الـ public مباشرة حسب الصورة image_280d60.png
+    cvUrl: "/Mousa AlHalabi.pdf", 
   },
   {
     name: "ضياء الدين العزيز",
@@ -91,7 +93,8 @@ const developers: Person[] = [
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/",
-    cvUrl: "/cv/diaaalazizResume.pdf",
+    // ✅ تم التصحيح: الملف في الـ public مباشرة حسب الصورة image_280d60.png
+    cvUrl: "/diaaalazizResume.pdf", 
   },
   {
     name: "جاسم الحجاب",
@@ -155,7 +158,9 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
                 "rounded-xl px-4 py-2 text-xs font-bold transition-all shadow-sm",
                 person.cvUrl ? primaryBtn : "bg-white/5 text-white/20 cursor-not-allowed"
               )}
-              onClick={(e) => !person.cvUrl && e.preventDefault()}
+              onClick={(e) => {
+                if (!person.cvUrl) e.preventDefault();
+              }}
             >
               السيرة الذاتية
             </a>
@@ -167,7 +172,9 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
                 "rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition-all",
                 person.linkedin ? "bg-white/5 text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"
               )}
-              onClick={(e) => !person.linkedin && e.preventDefault()}
+              onClick={(e) => {
+                if (!person.linkedin) e.preventDefault();
+              }}
             >
               LinkedIn
             </a>
@@ -182,20 +189,13 @@ export default function TeamShowcaseSection() {
   return (
     <section dir="rtl" className="relative py-24 text-white" style={{ backgroundColor: BRAND.dark }}>
       <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:40px_40px]" />
-      
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mb-16 text-center">
            <h2 className="text-3xl font-extrabold md:text-5xl lg:text-6xl tracking-tight">المؤسس والفريق التقني</h2>
-           <p className="mt-4 text-white/40 text-sm md:text-base">النخبة التي تقود الابتكار في منصة DASM-e</p>
         </div>
         
         <div className="mb-12">
           <PlayerCard person={founder} variant="founder" />
-        </div>
-
-        <div className="mb-6 flex items-center justify-between">
-            <h3 className="text-lg font-bold text-white/80">الفريق التقني</h3>
-            <div className="h-px flex-1 mx-4 bg-white/10" />
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -208,7 +208,7 @@ export default function TeamShowcaseSection() {
           <a 
             href="/architecture-preview.html" 
             target="_blank"
-            className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/5 px-8 py-4 text-sm font-bold text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
+            className="inline-flex items-center gap-2 rounded-2xl border border-white/20 bg-white/10 px-8 py-4 text-sm font-bold text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
           >
             📊 عرض مخطط المعمارية الهندسية
           </a>
