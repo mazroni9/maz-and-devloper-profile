@@ -24,9 +24,8 @@ const BRAND = {
 
 const founder: Person = {
   name: "محمد أحمد الزهراني",
-  role: "المؤسس والرئيس التنفيذي — DASM-e ",
+  role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
-  // ✅ المسار مطابق لصورك في المجلد الجديد
   image: "/team/founder.jpeg", 
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
@@ -70,7 +69,7 @@ const developers: Person[] = [
     image: "/team/موسى الحلبي.jpeg", 
     tags: ["Laravel", "Node.js", "DevOps", "Kubernetes", "AWS"],
     stats: [
-      { label: "الخبرة", value: "أكثر من 5 سنوات" },
+      { label: "الخبرة", value: "+5 سنوات" },
       { label: "القوة", value: "Scalability" },
       { label: "الأسلوب", value: "Clean Arch" },
     ],
@@ -101,6 +100,21 @@ const developers: Person[] = [
     tags: ["Laravel", "PHP", "Auction Logic", "Backend"],
     accent: "emerald",
   },
+  // ✅ إضافة العضو السابع: علي خضور بناءً على السيفي
+  {
+    name: "علي خضور",
+    role: "Senior Full-Stack Engineer",
+    subtitle: "أنظمة موزعة • معالجة بيانات في الوقت الحقيقي",
+    image: "/team/جاسم الحجاب.jpeg", // صورة افتراضية (لوجو الفينيقي)
+    tags: ["Java/Spring Boot", "React", "PostgreSQL", "Elasticsearch", "Microservices"],
+    stats: [
+      { label: "الخبرة", value: "+5 سنوات" },
+      { label: "الأداء", value: "+40% تحسين" },
+      { label: "المنهج", value: "Clean Logic" },
+    ],
+    accent: "navy",
+    cvUrl: "/Ali Khaddour.pdf", // رابط السيفي المرفق في الصورة
+  },
 ];
 
 function cx(...classes: Array<string | false | null | undefined>) {
@@ -120,10 +134,9 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
             src={encodeURI(person.image)} 
             alt={person.name} 
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" 
-            // ✅ إضافة ميزة الصورة الاحتياطية لمنع ظهور "الشكل الغريب"
             onError={(e) => {
-               const target = e.target as HTMLImageElement;
-               target.src = "/team/جاسم الحجاب.jpeg"; // سيتم عرض الفينيقي في حال فشل تحميل صورتك
+              const target = e.target as HTMLImageElement;
+              target.src = "/team/جاسم الحجاب.jpeg"; 
             }}
           />
         </div>
