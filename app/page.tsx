@@ -1,4 +1,3 @@
-// TeamShowcaseSection.tsx
 'use client';
 
 import React from "react";
@@ -11,7 +10,7 @@ type Person = {
   role: string;
   subtitle?: string;
 
-  // ✅ نسمح بأكثر من مسار للصورة (لأن الأسماء قد تختلف حرفيًا)
+  // ✅ allow multiple image paths (filenames can differ)
   imageCandidates: string[];
 
   tags: string[];
@@ -67,7 +66,7 @@ function RoleBadge({ text, accent }: { text?: string; accent?: Person["accent"] 
 }
 
 function safeUri(path: string) {
-  // يشفر المسافات/العربي… إلخ مع الحفاظ على السلاشات
+  // Encode spaces/Arabic etc while keeping slashes
   return encodeURI(path);
 }
 
@@ -83,12 +82,7 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
-  imageCandidates: [
-    "/team/founder.jpeg",
-    "/team/founder.jpg",
-    "/team/founder.png",
-    FALLBACK_IMAGE,
-  ],
+  imageCandidates: ["/team/founder.jpeg", "/team/founder.jpg", "/team/founder.png", FALLBACK_IMAGE],
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
     { label: "التركيز", value: "تنفيذ" },
@@ -144,11 +138,7 @@ const techTeam: Person[] = [
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
-    cvCandidates: [
-      "/cv/Mousa AlHalabi.pdf",
-      "/cv/Mousa_AlHalabi.pdf",
-      "/cv/MousaAlHalabi.pdf",
-    ],
+    cvCandidates: ["/CV/Mousa AlHalabi.pdf", "/CV/Mousa_AlHalabi.pdf", "/CV/MousaAlHalabi.pdf"],
     badge: "DEVOPS",
   },
   {
@@ -164,11 +154,7 @@ const techTeam: Person[] = [
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/",
-    cvCandidates: [
-      "/cv/diaaalazizResume.pdf",
-      "/cv/diaaalazizResume (1).pdf",
-      "/cv/diaa_alaziz_resume.pdf",
-    ],
+    cvCandidates: ["/CV/diaaalazizResume.pdf", "/CV/diaaalazizResume (1).pdf", "/CV/diaa_alaziz_resume.pdf"],
     badge: "FULL-STACK",
   },
   {
@@ -192,17 +178,15 @@ const techTeam: Person[] = [
       { label: "الأسلوب", value: "Clean Logic" },
     ],
     accent: "navy",
-    cvCandidates: ["/cv/Ali Khaddour.pdf", "/cv/Ali_Khaddour.pdf", "/cv/AliKhaddour.pdf"],
+    cvCandidates: ["/CV/Ali Khaddour.pdf", "/CV/Ali_Khaddour.pdf", "/CV/AliKhaddour.pdf"],
     badge: "SENIOR",
   },
-
-  // ✅ عيسى أحمد الحلبي — (الاسم الحقيقي من عندك)
   {
     name: "عيسى أحمد الحلبي",
     role: "Flutter Developer (Android & iOS)",
     subtitle: "تطبيقات موبايل • Firebase • REST APIs • Clean Architecture",
     imageCandidates: [
-      "/team/Essa Alhalbi.jpeg",   // ✅ الصحيح فعليًا
+      "/team/Essa Alhalbi.jpeg",
       "/team/Essa Alhalbi.jpg",
       "/team/Essa Alhalbi.png",
       FALLBACK_IMAGE,
@@ -214,14 +198,13 @@ const techTeam: Person[] = [
       { label: "الأسلوب", value: "Clean Architecture" },
     ],
     accent: "emerald",
-    // ✅ عدل هذا لو عندك الرابط الحقيقي
     linkedin: "https://linkedin.com/in/issa-al-halabi-6700b0247",
-    // ✅ عدل اسم ملف الـ CV هنا إذا كان مختلفًا حرفيًا
     cvCandidates: [
-      "/cv/ISSA ALHALABI.pdf",
-      "/cv/Issa AlHalabi.pdf",
-      "/cv/Issa_AlHalabi.pdf",
-      "/cv/IssaAlHalabi.pdf",
+      "/CV/issa alhalabi.pdf",
+      "/CV/Issa Alhalabi.pdf",
+      "/CV/Issa AlHalabi.pdf",
+      "/CV/Issa_AlHalabi.pdf",
+      "/CV/IssaAlHalabi.pdf",
     ],
     badge: "MOBILE",
   },
@@ -277,12 +260,7 @@ const managementTeam: Person[] = [
     name: "فيصل محمد أحمد الزهراني",
     role: "Finance & Operations",
     subtitle: "محاسبة • تسويات • تقارير مالية",
-    imageCandidates: [
-      "/management/فيصل.jpg",
-      "/management/فيصل.jpeg",
-      "/management/فيصل.png",
-      FALLBACK_IMAGE,
-    ],
+    imageCandidates: ["/management/فيصل.jpg", "/management/فيصل.jpeg", "/management/فيصل.png", FALLBACK_IMAGE],
     tags: ["Accounting", "Settlements", "Financial Reporting", "Operations"],
     stats: [
       { label: "المحور", value: "Finance" },
@@ -291,9 +269,9 @@ const managementTeam: Person[] = [
     ],
     accent: "gold",
     cvCandidates: [
-      "/cv/Faisal_Alzahrani_CV.pdf",
-      "/cv/Faisal Alzahrani CV.pdf",
-      "/cv/FaisalAlzahraniCV.pdf",
+      "/CV/Faisal_Alzahrani_CV.pdf",
+      "/CV/Faisal Alzahrani CV.pdf",
+      "/CV/FaisalAlzahraniCV.pdf",
     ],
     badge: "FINANCE",
   },
@@ -324,8 +302,7 @@ const managementTeam: Person[] = [
 
 /* =======================
    Control Room / Ops Team
-   صور أشرف وموسى غير موجودة حالياً
-   ✅ هيثم موجود الآن باسم: "Haithm Suliman.png"
+   ✅ folder in your public: /controlroom (NO hyphen)
 ======================= */
 const controlRoomTeam: Person[] = [
   {
@@ -351,16 +328,21 @@ const controlRoomTeam: Person[] = [
     role: "فريق الكنترول روم — تشغيل",
     subtitle: "إسناد • جودة • تنظيم",
     imageCandidates: [
-      "/control-room/Haithm Suliman.png",  // ✅ الصحيح
-      "/control-room/Haithm Suliman.jpg",
-      "/control-room/Haithm Suliman.jpeg",
-      "/control-room/haithm-suliman.png",
-      "/control-room/haitham-sulaiman.png",
+      "/controlroom/Haithm Suliman.png",
+      "/controlroom/Haithm Suliman.jpg",
+      "/controlroom/Haithm Suliman.jpeg",
+      "/controlroom/haithm-suliman.png",
+      "/controlroom/haitham-sulaiman.png",
       FALLBACK_IMAGE,
     ],
     tags: ["Quality", "Ops", "Process", "Support"],
     accent: "navy",
     badge: "OPS",
+    cvCandidates: [
+      "/CV/Haithm Suliman.pdf",
+      "/CV/Haithm_Suliman.pdf",
+      "/CV/HaithmSuliman.pdf",
+    ],
   },
 ];
 
@@ -397,9 +379,16 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
             onError={(e) => {
               const img = e.target as HTMLImageElement;
               const list = person.imageCandidates?.length ? person.imageCandidates : [FALLBACK_IMAGE];
-              const current = decodeURI(img.src);
 
-              const idx = list.findIndex((p) => current.endsWith(encodeURI(p)));
+              // Use pathname to avoid domain/protocol differences
+              let currentPath = "";
+              try {
+                currentPath = new URL(img.src).pathname;
+              } catch {
+                currentPath = img.src;
+              }
+
+              const idx = list.findIndex((p) => currentPath === safeUri(p));
               const next = idx >= 0 && idx < list.length - 1 ? list[idx + 1] : FALLBACK_IMAGE;
 
               img.src = safeUri(next);
@@ -436,13 +425,13 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
           )}
 
           {/* Actions */}
-          <div className="mt-auto pt-6 flex flex-wrap gap-3">
+          <div className="mt-auto flex flex-wrap gap-3 pt-6">
             <a
               href={cvHref ? safeUri(cvHref) : "#"}
               target={cvHref ? "_blank" : "_self"}
               className={cx(
                 "rounded-xl px-4 py-2 text-xs font-bold transition",
-                cvHref ? primaryBtn : "bg-white/5 text-white/20 cursor-not-allowed"
+                cvHref ? primaryBtn : "cursor-not-allowed bg-white/5 text-white/20"
               )}
               onClick={(e) => {
                 if (!cvHref) e.preventDefault();
@@ -456,7 +445,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
               target={linkedInHref ? "_blank" : "_self"}
               className={cx(
                 "rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition",
-                linkedInHref ? "bg-white/5 text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"
+                linkedInHref ? "bg-white/5 text-white hover:bg-white/10" : "cursor-not-allowed text-white/20"
               )}
               onClick={(e) => {
                 if (!linkedInHref) e.preventDefault();
@@ -476,10 +465,10 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
 ======================= */
 function SectionHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
-    <div className="mt-14 mb-8">
+    <div className="mb-8 mt-14">
       <div className="flex items-center gap-4">
         <div className="h-px flex-1 bg-white/10" />
-        <h3 className="text-lg md:text-xl font-extrabold text-white">{title}</h3>
+        <h3 className="text-lg font-extrabold text-white md:text-xl">{title}</h3>
         <div className="h-px flex-1 bg-white/10" />
       </div>
       {subtitle ? <p className="mt-3 text-center text-sm text-white/55">{subtitle}</p> : null}
@@ -496,9 +485,7 @@ export default function TeamShowcaseSection() {
       <div className="pointer-events-none absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:40px_40px]" />
 
       <div className="relative mx-auto max-w-6xl px-5">
-        <h2 className="mb-16 text-center text-4xl font-extrabold md:text-6xl">
-          المؤسس والفِرق الرئيسية
-        </h2>
+        <h2 className="mb-16 text-center text-4xl font-extrabold md:text-6xl">المؤسس والفِرق الرئيسية</h2>
 
         {/* Founder */}
         <div className="mb-12">
@@ -527,17 +514,18 @@ export default function TeamShowcaseSection() {
           ))}
         </div>
 
-{/* Control Room */}
-<SectionHeader
-  title="الكنترول روم وفريق التشغيل"
-  subtitle="صور أشرف وموسى غير متوفرة حاليًا — صورة هيثم مربوطة باسمه الحقيقي من مجلد controlroom."
-/>
+        {/* Control Room */}
+        <SectionHeader
+          title="الكنترول روم وفريق التشغيل"
+          subtitle="صور أشرف وموسى غير متوفرة حاليًا — صورة هيثم مربوطة باسمه الحقيقي من مجلد controlroom."
+        />
 
-<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-  {controlRoomTeam.map((p) => (
-    <PlayerCard key={p.name} person={p} variant="member" />
-  ))}
-</div>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {controlRoomTeam.map((p) => (
+            <PlayerCard key={p.name} person={p} variant="member" />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
