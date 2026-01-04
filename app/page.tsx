@@ -202,11 +202,9 @@ const techTeam: Person[] = [
     role: "Flutter Developer (Android & iOS)",
     subtitle: "تطبيقات موبايل • Firebase • REST APIs • Clean Architecture",
     imageCandidates: [
-      "/team/Essa Alhalbi.png",      // ✅ الصحيح
+      "/team/Essa Alhalbi.jpeg",   // ✅ الصحيح فعليًا
       "/team/Essa Alhalbi.jpg",
-      "/team/Essa Alhalbi.jpeg",
-      "/team/essa-alhalbi.png",
-      "/team/issa-alhalabi.png",
+      "/team/Essa Alhalbi.png",
       FALLBACK_IMAGE,
     ],
     tags: ["Flutter", "Dart", "Firebase", "REST APIs", "CI/CD"],
@@ -331,7 +329,7 @@ const managementTeam: Person[] = [
 ======================= */
 const controlRoomTeam: Person[] = [
   {
-    name: "اشرف فراج",
+    name: "اشرف فرج",
     role: "فريق الكنترول روم — تشغيل",
     subtitle: "تشغيل بث • متابعة عمليات • دعم فوري",
     imageCandidates: [FALLBACK_IMAGE],
