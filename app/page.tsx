@@ -1,3 +1,4 @@
+// TeamShowcaseSection.tsx
 'use client';
 
 import React from "react";
@@ -9,12 +10,15 @@ type Person = {
   name: string;
   role: string;
   subtitle?: string;
-  image: string;
+
+  // ✅ نسمح بأكثر من مسار للصورة (لأن الأسماء قد تختلف حرفيًا)
+  imageCandidates: string[];
+
   tags: string[];
   stats?: { label: string; value: string }[];
   accent?: "emerald" | "navy" | "gold";
   linkedin?: string;
-  cvUrl?: string;
+  cvCandidates?: string[];
   badge?: string;
 };
 
@@ -62,8 +66,13 @@ function RoleBadge({ text, accent }: { text?: string; accent?: Person["accent"] 
   );
 }
 
+function safeUri(path: string) {
+  // يشفر المسافات/العربي… إلخ مع الحفاظ على السلاشات
+  return encodeURI(path);
+}
+
 /* =======================
-   Assets (Fallback)
+   Fallback
 ======================= */
 const FALLBACK_IMAGE = "/team/الفينيقي.jpeg";
 
@@ -74,7 +83,12 @@ const founder: Person = {
   name: "محمد أحمد الزهراني",
   role: "المؤسس والرئيس التنفيذي — DASM-e",
   subtitle: "مهندس رؤية المنصة • قائد تشغيل • صانع سوق",
-  image: "/team/founder.jpeg",
+  imageCandidates: [
+    "/team/founder.jpeg",
+    "/team/founder.jpg",
+    "/team/founder.png",
+    FALLBACK_IMAGE,
+  ],
   tags: ["المزادات الرقمية", "التدفقات المالية", "تسعير بالذكاء الاصطناعي", "هندسة الأنظمة"],
   stats: [
     { label: "التركيز", value: "تنفيذ" },
@@ -87,14 +101,14 @@ const founder: Person = {
 };
 
 /* =======================
-   Tech Team
+   Tech Team (+ Issa)
 ======================= */
 const techTeam: Person[] = [
   {
     name: "لؤي أبو جلهوم",
     role: "قائد الفريق التقني — Backend",
     subtitle: "واجهات API • منطق المزادات • وقت حقيقي",
-    image: "/team/لؤي ابوجلهوم.png",
+    imageCandidates: ["/team/لؤي ابوجلهوم.png", "/team/لؤي أبو جلهوم.png", FALLBACK_IMAGE],
     tags: ["Laravel", "PostgreSQL", "WebSockets", "Architecture"],
     accent: "emerald",
     badge: "BACKEND LEAD",
@@ -103,7 +117,7 @@ const techTeam: Person[] = [
     name: "محمد خالد",
     role: "Frontend Developer",
     subtitle: "واجهات • داشبورد • تجربة منتج",
-    image: "/team/محمد خالد.jpg",
+    imageCandidates: ["/team/محمد خالد.jpg", "/team/محمد خالد.jpeg", "/team/محمد خالد.png", FALLBACK_IMAGE],
     tags: ["React/Next.js", "Tailwind", "UI Components", "UX"],
     accent: "navy",
     badge: "FRONTEND",
@@ -112,7 +126,7 @@ const techTeam: Person[] = [
     name: "عامر الحوراني",
     role: "Backend (Node.js) & Streaming Specialist",
     subtitle: "دمج • تسليم • حلول بث",
-    image: "/team/عامر الحوراني.jpeg",
+    imageCandidates: ["/team/عامر الحوراني.jpeg", "/team/عامر الحوراني.jpg", "/team/عامر الحوراني.png", FALLBACK_IMAGE],
     tags: ["Integration", "Delivery", "Streaming", "Quality"],
     accent: "navy",
     badge: "STREAMING",
@@ -121,7 +135,7 @@ const techTeam: Person[] = [
     name: "موسى الحلبي",
     role: "Backend Developer | DevOps Engineer",
     subtitle: "أنظمة سحابية • أتمتة CI/CD • تحسين أداء",
-    image: "/team/موسى الحلبي.jpeg",
+    imageCandidates: ["/team/موسى الحلبي.jpeg", "/team/موسى الحلبي.jpg", "/team/موسى الحلبي.png", FALLBACK_IMAGE],
     tags: ["Laravel", "Node.js", "DevOps", "AWS", "Kubernetes"],
     stats: [
       { label: "الخبرة", value: "+5 سنوات" },
@@ -130,14 +144,18 @@ const techTeam: Person[] = [
     ],
     accent: "emerald",
     linkedin: "https://linkedin.com/in/mousa-al-halabi-9183a9237",
-    cvUrl: "/cv/Mousa AlHalabi.pdf",
+    cvCandidates: [
+      "/cv/Mousa AlHalabi.pdf",
+      "/cv/Mousa_AlHalabi.pdf",
+      "/cv/MousaAlHalabi.pdf",
+    ],
     badge: "DEVOPS",
   },
   {
     name: "ضياء الدين العزيز",
     role: "Full-Stack Developer",
     subtitle: "حلول ذكاء اصطناعي • Next.js • Cloudflare",
-    image: "/team/ضياء العزيز.jpg",
+    imageCandidates: ["/team/ضياء العزيز.jpg", "/team/ضياء العزيز.jpeg", "/team/ضياء العزيز.png", FALLBACK_IMAGE],
     tags: ["Next.js", "TypeScript", "Cloudflare", "AI Integration"],
     stats: [
       { label: "المحور", value: "Full-Stack" },
@@ -146,14 +164,18 @@ const techTeam: Person[] = [
     ],
     accent: "navy",
     linkedin: "https://www.linkedin.com/in/dhia2004/",
-    cvUrl: "/cv/diaaalazizResume.pdf",
+    cvCandidates: [
+      "/cv/diaaalazizResume.pdf",
+      "/cv/diaaalazizResume (1).pdf",
+      "/cv/diaa_alaziz_resume.pdf",
+    ],
     badge: "FULL-STACK",
   },
   {
     name: "جاسم الحجاب",
     role: "مطور لارافيل — أنظمة المزادات",
     subtitle: "منطق المزاد • دعم تقني حاسم",
-    image: "/team/جاسم الحجاب.jpeg",
+    imageCandidates: ["/team/جاسم الحجاب.jpeg", "/team/جاسم الحجاب.jpg", "/team/جاسم الحجاب.png", FALLBACK_IMAGE],
     tags: ["Laravel", "PHP", "Auction Logic", "Backend"],
     accent: "emerald",
     badge: "AUCTIONS",
@@ -162,7 +184,7 @@ const techTeam: Person[] = [
     name: "علي خضور",
     role: "Senior Full-Stack Engineer",
     subtitle: "أنظمة موزعة • بيانات وقت حقيقي • جاهزية للتوسع",
-    image: FALLBACK_IMAGE,
+    imageCandidates: ["/team/الفينيقي.jpeg", FALLBACK_IMAGE],
     tags: ["Java/Spring Boot", "React", "PostgreSQL", "Microservices", "Elasticsearch"],
     stats: [
       { label: "الخبرة", value: "+5 سنوات" },
@@ -170,8 +192,40 @@ const techTeam: Person[] = [
       { label: "الأسلوب", value: "Clean Logic" },
     ],
     accent: "navy",
-    cvUrl: "/cv/Ali Khaddour.pdf",
+    cvCandidates: ["/cv/Ali Khaddour.pdf", "/cv/Ali_Khaddour.pdf", "/cv/AliKhaddour.pdf"],
     badge: "SENIOR",
+  },
+
+  // ✅ عيسى أحمد الحلبي — (الاسم الحقيقي من عندك)
+  {
+    name: "عيسى أحمد الحلبي",
+    role: "Flutter Developer (Android & iOS)",
+    subtitle: "تطبيقات موبايل • Firebase • REST APIs • Clean Architecture",
+    imageCandidates: [
+      "/team/Essa Alhalbi.png",      // ✅ الصحيح
+      "/team/Essa Alhalbi.jpg",
+      "/team/Essa Alhalbi.jpeg",
+      "/team/essa-alhalbi.png",
+      "/team/issa-alhalabi.png",
+      FALLBACK_IMAGE,
+    ],
+    tags: ["Flutter", "Dart", "Firebase", "REST APIs", "CI/CD"],
+    stats: [
+      { label: "المجال", value: "Mobile Apps" },
+      { label: "القوة", value: "Flutter" },
+      { label: "الأسلوب", value: "Clean Architecture" },
+    ],
+    accent: "emerald",
+    // ✅ عدل هذا لو عندك الرابط الحقيقي
+    linkedin: "https://linkedin.com/in/issa-al-halabi-6700b0247",
+    // ✅ عدل اسم ملف الـ CV هنا إذا كان مختلفًا حرفيًا
+    cvCandidates: [
+      "/cv/ISSA ALHALABI.pdf",
+      "/cv/Issa AlHalabi.pdf",
+      "/cv/Issa_AlHalabi.pdf",
+      "/cv/IssaAlHalabi.pdf",
+    ],
+    badge: "MOBILE",
   },
 ];
 
@@ -183,7 +237,12 @@ const managementTeam: Person[] = [
     name: "عبدالله أحمد",
     role: "المدير التنفيذي",
     subtitle: "قيادة تنفيذية • حوكمة • استراتيجية",
-    image: "/management/abdullah-ahmed.jpeg",
+    imageCandidates: [
+      "/management/abdullah-ahmed.jpeg",
+      "/management/abdullah-ahmed.jpg",
+      "/management/abdullah-ahmed.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["Leadership", "Strategy", "Execution", "Governance"],
     accent: "gold",
     badge: "EXECUTIVE DIRECTOR",
@@ -192,7 +251,12 @@ const managementTeam: Person[] = [
     name: "محمد العتيبي",
     role: "رئيس العمليات والتشغيل",
     subtitle: "تشغيل • إجراءات • متابعة جودة",
-    image: "/management/محمد العتيبي.jpeg",
+    imageCandidates: [
+      "/management/محمد العتيبي.jpeg",
+      "/management/محمد العتيبي.jpg",
+      "/management/محمد العتيبي.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["Operations", "Process", "Quality", "Delivery"],
     accent: "navy",
     badge: "COO",
@@ -201,7 +265,12 @@ const managementTeam: Person[] = [
     name: "يوسف أحمد",
     role: "العلاقات العامة",
     subtitle: "علاقات • شراكات • تواصل مؤسسي",
-    image: "/management/يوسف احمد.jpeg",
+    imageCandidates: [
+      "/management/يوسف احمد.jpeg",
+      "/management/يوسف احمد.jpg",
+      "/management/يوسف احمد.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["PR", "Partnerships", "Communication", "Brand"],
     accent: "navy",
     badge: "PR",
@@ -210,7 +279,12 @@ const managementTeam: Person[] = [
     name: "فيصل محمد أحمد الزهراني",
     role: "Finance & Operations",
     subtitle: "محاسبة • تسويات • تقارير مالية",
-    image: "/management/فيصل.jpg",
+    imageCandidates: [
+      "/management/فيصل.jpg",
+      "/management/فيصل.jpeg",
+      "/management/فيصل.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["Accounting", "Settlements", "Financial Reporting", "Operations"],
     stats: [
       { label: "المحور", value: "Finance" },
@@ -218,14 +292,23 @@ const managementTeam: Person[] = [
       { label: "الأسلوب", value: "انضباط مالي" },
     ],
     accent: "gold",
-    cvUrl: "/cv/Faisal_Alzahrani_CV.pdf",
+    cvCandidates: [
+      "/cv/Faisal_Alzahrani_CV.pdf",
+      "/cv/Faisal Alzahrani CV.pdf",
+      "/cv/FaisalAlzahraniCV.pdf",
+    ],
     badge: "FINANCE",
   },
   {
     name: "فارس العتيق",
     role: "التنسيق والتسويق",
     subtitle: "تنسيق • تسويق • تنظيم حملات",
-    image: "/management/فارس العتيق.jpeg",
+    imageCandidates: [
+      "/management/فارس العتيق.jpeg",
+      "/management/فارس العتيق.jpg",
+      "/management/فارس العتيق.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["Marketing", "Coordination", "Campaigns", "Growth"],
     accent: "emerald",
     badge: "MARKETING",
@@ -234,7 +317,7 @@ const managementTeam: Person[] = [
     name: "خضر أحمد",
     role: "مسؤول متابعة الشؤون القانونية",
     subtitle: "امتثال • تنظيم • متابعة قانونية",
-    image: FALLBACK_IMAGE, // لا توجد صورة حاليا
+    imageCandidates: [FALLBACK_IMAGE],
     tags: ["Legal", "Compliance", "Regulation", "Governance"],
     accent: "navy",
     badge: "LEGAL",
@@ -242,15 +325,16 @@ const managementTeam: Person[] = [
 ];
 
 /* =======================
-   Control Room / Ops Team (No images yet)
-   Future images will live in: /public/control-room/
+   Control Room / Ops Team
+   صور أشرف وموسى غير موجودة حالياً
+   ✅ هيثم موجود الآن باسم: "Haithm Suliman.png"
 ======================= */
 const controlRoomTeam: Person[] = [
   {
     name: "اشرف فراج",
     role: "فريق الكنترول روم — تشغيل",
     subtitle: "تشغيل بث • متابعة عمليات • دعم فوري",
-    image: FALLBACK_IMAGE, // لاحقًا: "/control-room/ashraf-faraj.jpeg"
+    imageCandidates: [FALLBACK_IMAGE],
     tags: ["Ops", "Control Room", "Monitoring", "Support"],
     accent: "emerald",
     badge: "CONTROL ROOM",
@@ -259,7 +343,7 @@ const controlRoomTeam: Person[] = [
     name: "موسى محمد",
     role: "فريق الكنترول روم — تشغيل",
     subtitle: "تنسيق • متابعة • جاهزية",
-    image: FALLBACK_IMAGE, // لاحقًا: "/control-room/mousa-mohammed.jpeg"
+    imageCandidates: [FALLBACK_IMAGE],
     tags: ["Coordination", "Ops", "Readiness", "Execution"],
     accent: "navy",
     badge: "OPS",
@@ -268,7 +352,14 @@ const controlRoomTeam: Person[] = [
     name: "هيثم سليمان",
     role: "فريق الكنترول روم — تشغيل",
     subtitle: "إسناد • جودة • تنظيم",
-    image: FALLBACK_IMAGE, // لاحقًا: "/control-room/haitham-sulaiman.jpeg"
+    imageCandidates: [
+      "/control-room/Haithm Suliman.png",  // ✅ الصحيح
+      "/control-room/Haithm Suliman.jpg",
+      "/control-room/Haithm Suliman.jpeg",
+      "/control-room/haithm-suliman.png",
+      "/control-room/haitham-sulaiman.png",
+      FALLBACK_IMAGE,
+    ],
     tags: ["Quality", "Ops", "Process", "Support"],
     accent: "navy",
     badge: "OPS",
@@ -286,6 +377,11 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
     ? "bg-[#D4AF37] text-black hover:shadow-[0_0_40px_rgba(212,175,55,0.25)]"
     : "bg-white text-black hover:bg-white/90";
 
+  const cvHref = person.cvCandidates?.[0];
+  const linkedInHref = person.linkedin;
+
+  const img0 = person.imageCandidates?.[0] || FALLBACK_IMAGE;
+
   return (
     <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 shadow-2xl transition-all duration-300 hover:-translate-y-0.5">
       <div className="absolute right-5 top-5 z-10">
@@ -293,18 +389,27 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
       </div>
 
       <div className="grid gap-6 md:grid-cols-[180px_1fr]">
+        {/* Image */}
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
           <img
-            src={person.image}
+            src={safeUri(img0)}
             alt={person.name}
             className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
-            }}
             loading="lazy"
+            onError={(e) => {
+              const img = e.target as HTMLImageElement;
+              const list = person.imageCandidates?.length ? person.imageCandidates : [FALLBACK_IMAGE];
+              const current = decodeURI(img.src);
+
+              const idx = list.findIndex((p) => current.endsWith(encodeURI(p)));
+              const next = idx >= 0 && idx < list.length - 1 ? list[idx + 1] : FALLBACK_IMAGE;
+
+              img.src = safeUri(next);
+            }}
           />
         </div>
 
+        {/* Content */}
         <div className="flex flex-col">
           <h3 className="text-xl font-bold text-white">{person.name}</h3>
           <p className="text-sm text-white/60">{person.role}</p>
@@ -332,30 +437,31 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
             </div>
           )}
 
+          {/* Actions */}
           <div className="mt-auto pt-6 flex flex-wrap gap-3">
             <a
-              href={person.cvUrl ? person.cvUrl : "#"}
-              target={person.cvUrl ? "_blank" : "_self"}
+              href={cvHref ? safeUri(cvHref) : "#"}
+              target={cvHref ? "_blank" : "_self"}
               className={cx(
                 "rounded-xl px-4 py-2 text-xs font-bold transition",
-                person.cvUrl ? primaryBtn : "bg-white/5 text-white/20 cursor-not-allowed"
+                cvHref ? primaryBtn : "bg-white/5 text-white/20 cursor-not-allowed"
               )}
               onClick={(e) => {
-                if (!person.cvUrl) e.preventDefault();
+                if (!cvHref) e.preventDefault();
               }}
             >
               السيرة الذاتية
             </a>
 
             <a
-              href={person.linkedin || "#"}
-              target={person.linkedin ? "_blank" : "_self"}
+              href={linkedInHref || "#"}
+              target={linkedInHref ? "_blank" : "_self"}
               className={cx(
                 "rounded-xl border border-white/10 px-4 py-2 text-xs font-bold transition",
-                person.linkedin ? "bg-white/5 text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"
+                linkedInHref ? "bg-white/5 text-white hover:bg-white/10" : "text-white/20 cursor-not-allowed"
               )}
               onClick={(e) => {
-                if (!person.linkedin) e.preventDefault();
+                if (!linkedInHref) e.preventDefault();
               }}
             >
               LinkedIn
@@ -396,13 +502,15 @@ export default function TeamShowcaseSection() {
           المؤسس والفِرق الرئيسية
         </h2>
 
+        {/* Founder */}
         <div className="mb-12">
           <PlayerCard person={founder} variant="founder" />
         </div>
 
+        {/* Tech */}
         <SectionHeader
           title="الفريق التقني"
-          subtitle="الفريق الذي حوّل الفكرة إلى منتج يعمل — هندسة، واجهات، بنية تحتية، وتشغيل وقت حقيقي."
+          subtitle="الفريق الذي حوّل الفكرة إلى منتج يعمل — هندسة، واجهات، بنية تحتية، وموبايل."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {techTeam.map((p) => (
@@ -410,6 +518,7 @@ export default function TeamShowcaseSection() {
           ))}
         </div>
 
+        {/* Management */}
         <SectionHeader
           title="فريق الإدارة"
           subtitle="إدارة التشغيل والتنفيذ المالي والتسويق والتنسيق لضمان نمو المنصة واستمراريتها."
@@ -420,9 +529,10 @@ export default function TeamShowcaseSection() {
           ))}
         </div>
 
+        {/* Control Room */}
         <SectionHeader
           title="الكنترول روم وفريق التشغيل"
-          subtitle="حالياً بدون صور — عند توفرها ضعها في public/control-room وسيتم ربطها فوراً."
+          subtitle="صور أشرف وموسى كانت غير متوفرة — الآن هيثم مربوط باسمه الحقيقي من مجلد control-room."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {controlRoomTeam.map((p) => (
