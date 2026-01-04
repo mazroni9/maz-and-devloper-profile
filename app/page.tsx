@@ -529,17 +529,17 @@ export default function TeamShowcaseSection() {
           ))}
         </div>
 
-        {/* Control Room */}
-        <SectionHeader
-          title="الكنترول روم وفريق التشغيل"
-          subtitle="صور أشرف وموسى كانت غير متوفرة — الآن هيثم مربوط باسمه الحقيقي من مجلد control-room."
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {controlRoomTeam.map((p) => (
-            <PlayerCard key={p.name} person={p} variant="member" />
-          ))}
-        </div>
-      </div>
+{/* Control Room */}
+<SectionHeader
+  title="الكنترول روم وفريق التشغيل"
+  subtitle="صور أشرف وموسى غير متوفرة حاليًا — صورة هيثم مربوطة باسمه الحقيقي من مجلد controlroom."
+/>
+
+<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {controlRoomTeam.map((p) => (
+    <PlayerCard key={p.name} person={p} variant="member" />
+  ))}
+</div>
     </section>
   );
 }
