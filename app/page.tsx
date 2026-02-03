@@ -312,25 +312,25 @@ const managementTeam: Person[] = [
 const controlRoomTeam: Person[] = [
   {
     name: "اشرف فرج",
-    role: "فريق الكنترول روم — تشغيل",
+    role: "مشرف الكنترول روم",
     subtitle: "تشغيل بث • متابعة عمليات • دعم فوري",
     imageCandidates: [FALLBACK_IMAGE],
-    tags: ["Ops", "Control Room", "Monitoring", "Support"],
+    tags: ["Control Room", "Operations"],
     accent: "emerald",
     badge: "CONTROL ROOM",
   },
   {
     name: "موسى محمد",
-    role: "فريق الكنترول روم — تشغيل",
+    role: "تشغيل البث",
     subtitle: "تنسيق • متابعة • جاهزية",
     imageCandidates: [FALLBACK_IMAGE],
-    tags: ["Coordination", "Ops", "Readiness", "Execution"],
+    tags: ["Broadcast", "Execution"],
     accent: "navy",
     badge: "OPS",
   },
   {
     name: "هيثم سليمان",
-    role: "فريق الكنترول روم — تشغيل",
+    role: "الدعم الفني",
     subtitle: "إسناد • جودة • تنظيم",
     imageCandidates: [
       "/controlroom/Haithm Suliman.png",
@@ -343,11 +343,6 @@ const controlRoomTeam: Person[] = [
     tags: ["Quality", "Ops", "Process", "Support"],
     accent: "navy",
     badge: "OPS",
-    cvCandidates: [
-      "/CV/Haithm Suliman.pdf",
-      "/CV/Haithm_Suliman.pdf",
-      "/CV/HaithmSuliman.pdf",
-    ],
   },
 ];
 
