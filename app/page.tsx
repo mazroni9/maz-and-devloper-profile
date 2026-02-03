@@ -10,7 +10,6 @@ type Person = {
   role: string;
   subtitle?: string;
 
-  // ✅ allow multiple image paths (filenames can differ)
   imageCandidates: string[];
 
   tags: string[];
@@ -19,6 +18,7 @@ type Person = {
   linkedin?: string;
   cvCandidates?: string[];
   badge?: string;
+  frame?: "gold";
 };
 
 /* =======================
@@ -66,7 +66,6 @@ function RoleBadge({ text, accent }: { text?: string; accent?: Person["accent"] 
 }
 
 function safeUri(path: string) {
-  // Encode spaces/Arabic etc while keeping slashes
   return encodeURI(path);
 }
 
@@ -95,9 +94,33 @@ const founder: Person = {
 };
 
 /* =======================
+   ✅ Co‑Founder (Faisal promoted)
+======================= */
+const coFounder: Person = {
+  name: "فيصل محمد أحمد الزهراني",
+  role: "شريك مؤسس — DASM-e",
+  subtitle: "المالية والتشغيل • التسويات • التقارير",
+  imageCandidates: ["/management/فيصل.jpg", "/management/فيصل.jpeg", "/management/فيصل.png", FALLBACK_IMAGE],
+  tags: ["Finance", "Operations", "Settlements", "Financial Reporting"],
+  stats: [
+    { label: "المحور", value: "Finance & Ops" },
+    { label: "القوة", value: "تسويات دقيقة" },
+    { label: "الأسلوب", value: "انضباط مالي" },
+  ],
+  accent: "gold",
+  cvCandidates: [
+    "/CV/Faisal_Alzahrani_CV.pdf",
+    "/CV/Faisal Alzahrani CV.pdf",
+    "/CV/FaisalAlzahraniCV.pdf",
+  ],
+  badge: "CO‑FOUNDER",
+};
+
+/* =======================
    Tech Team (+ Issa)
 ======================= */
 const techTeam: Person[] = [
+  // 1) Lead
   {
     name: "لؤي أبو جلهوم",
     role: "قائد الفريق التقني — Backend",
@@ -106,24 +129,44 @@ const techTeam: Person[] = [
     tags: ["Laravel", "PostgreSQL", "WebSockets", "Architecture"],
     accent: "emerald",
     badge: "BACKEND LEAD",
+    frame: "gold", // ✅ تمييز القائد بإطار ذهبي
+  },
+
+  // 2) Seniors
+  {
+    name: "علي خضور",
+    role: "Senior Full-Stack Engineer",
+    subtitle: "أنظمة موزعة • بيانات وقت حقيقي • جاهزية للتوسع",
+    imageCandidates: ["/team/الفينيقي.jpeg", FALLBACK_IMAGE],
+    tags: ["Java/Spring Boot", "React", "PostgreSQL", "Microservices", "Elasticsearch"],
+    stats: [
+      { label: "الخبرة", value: "+5 سنوات" },
+      { label: "المجال", value: "Distributed Systems" },
+      { label: "الأسلوب", value: "Clean Logic" },
+    ],
+    accent: "navy",
+    cvCandidates: ["/CV/Ali Khaddour.pdf", "/CV/Ali_Khaddour.pdf", "/CV/AliKhaddour.pdf"],
+    badge: "SENIOR",
   },
   {
-    name: "محمد خالد",
-    role: "Frontend Developer",
-    subtitle: "واجهات • داشبورد • تجربة منتج",
-    imageCandidates: ["/team/محمد خالد.jpg", "/team/محمد خالد.jpeg", "/team/محمد خالد.png", FALLBACK_IMAGE],
-    tags: ["React/Next.js", "Tailwind", "UI Components", "UX"],
-    accent: "navy",
-    badge: "FRONTEND",
-  },
-  {
-    name: "عامر الحوراني",
-    role: "Backend (Node.js) & Streaming Specialist",
-    subtitle: "دمج • تسليم • حلول بث",
-    imageCandidates: ["/team/عامر الحوراني.jpeg", "/team/عامر الحوراني.jpg", "/team/عامر الحوراني.png", FALLBACK_IMAGE],
-    tags: ["Integration", "Delivery", "Streaming", "Quality"],
-    accent: "navy",
-    badge: "STREAMING",
+    name: "عبدالرحمن جمال",
+    role: "Senior Full‑Stack Web Developer",
+    subtitle: "Laravel • SaaS • Clean Architecture • SOLID",
+    imageCandidates: [
+      "/team/AbdelrahmanBl CV 2026.png",
+      "/team/AbdelrahmanBl CV 2026.jpg",
+      FALLBACK_IMAGE,
+    ],
+    tags: ["Laravel", "Clean Architecture", "SOLID", "SaaS", "E‑commerce"],
+    stats: [
+      { label: "الخبرة", value: "Senior Level" },
+      { label: "Open Source", value: "Spatie Contributor" },
+      { label: "التركيز", value: "SaaS Platforms" },
+    ],
+    accent: "emerald",
+    linkedin: "https://linkedin.com/in/abdelrahmanbl",
+    cvCandidates: ["/CV/AbdelrahmanBl CV 2026.pdf"],
+    badge: "FULL‑STACK",
   },
   {
     name: "موسى الحلبي",
@@ -141,6 +184,8 @@ const techTeam: Person[] = [
     cvCandidates: ["/CV/Mousa AlHalabi.pdf", "/CV/Mousa_AlHalabi.pdf", "/CV/MousaAlHalabi.pdf"],
     badge: "DEVOPS",
   },
+
+  // 3) Core engineers
   {
     name: "ضياء الدين العزيز",
     role: "Full-Stack Developer",
@@ -167,19 +212,22 @@ const techTeam: Person[] = [
     badge: "AUCTIONS",
   },
   {
-    name: "علي خضور",
-    role: "Senior Full-Stack Engineer",
-    subtitle: "أنظمة موزعة • بيانات وقت حقيقي • جاهزية للتوسع",
-    imageCandidates: ["/team/الفينيقي.jpeg", FALLBACK_IMAGE],
-    tags: ["Java/Spring Boot", "React", "PostgreSQL", "Microservices", "Elasticsearch"],
-    stats: [
-      { label: "الخبرة", value: "+5 سنوات" },
-      { label: "المجال", value: "Distributed Systems" },
-      { label: "الأسلوب", value: "Clean Logic" },
-    ],
+    name: "عامر الحوراني",
+    role: "Backend (Node.js) & Streaming Specialist",
+    subtitle: "دمج • تسليم • حلول بث",
+    imageCandidates: ["/team/عامر الحوراني.jpeg", "/team/عامر الحوراني.jpg", "/team/عامر الحوراني.png", FALLBACK_IMAGE],
+    tags: ["Integration", "Delivery", "Streaming", "Quality"],
     accent: "navy",
-    cvCandidates: ["/CV/Ali Khaddour.pdf", "/CV/Ali_Khaddour.pdf", "/CV/AliKhaddour.pdf"],
-    badge: "SENIOR",
+    badge: "STREAMING",
+  },
+  {
+    name: "محمد خالد",
+    role: "Frontend Developer",
+    subtitle: "واجهات • داشبورد • تجربة منتج",
+    imageCandidates: ["/team/محمد خالد.jpg", "/team/محمد خالد.jpeg", "/team/محمد خالد.png", FALLBACK_IMAGE],
+    tags: ["React/Next.js", "Tailwind", "UI Components", "UX"],
+    accent: "navy",
+    badge: "FRONTEND",
   },
   {
     name: "عيسى أحمد الحلبي",
@@ -211,7 +259,7 @@ const techTeam: Person[] = [
 ];
 
 /* =======================
-   Management Team
+   Management Team (after promotion)
 ======================= */
 const managementTeam: Person[] = [
   {
@@ -243,39 +291,6 @@ const managementTeam: Person[] = [
     badge: "COO",
   },
   {
-    name: "يوسف أحمد",
-    role: "العلاقات العامة",
-    subtitle: "علاقات • شراكات • تواصل مؤسسي",
-    imageCandidates: [
-      "/management/يوسف احمد.jpeg",
-      "/management/يوسف احمد.jpg",
-      "/management/يوسف احمد.png",
-      FALLBACK_IMAGE,
-    ],
-    tags: ["PR", "Partnerships", "Communication", "Brand"],
-    accent: "navy",
-    badge: "PR",
-  },
-  {
-    name: "فيصل محمد أحمد الزهراني",
-    role: "Finance & Operations",
-    subtitle: "محاسبة • تسويات • تقارير مالية",
-    imageCandidates: ["/management/فيصل.jpg", "/management/فيصل.jpeg", "/management/فيصل.png", FALLBACK_IMAGE],
-    tags: ["Accounting", "Settlements", "Financial Reporting", "Operations"],
-    stats: [
-      { label: "المحور", value: "Finance" },
-      { label: "القوة", value: "تسويات دقيقة" },
-      { label: "الأسلوب", value: "انضباط مالي" },
-    ],
-    accent: "gold",
-    cvCandidates: [
-      "/CV/Faisal_Alzahrani_CV.pdf",
-      "/CV/Faisal Alzahrani CV.pdf",
-      "/CV/FaisalAlzahraniCV.pdf",
-    ],
-    badge: "FINANCE",
-  },
-  {
     name: "فارس العتيق",
     role: "التنسيق والتسويق",
     subtitle: "تنسيق • تسويق • تنظيم حملات",
@@ -289,20 +304,10 @@ const managementTeam: Person[] = [
     accent: "emerald",
     badge: "MARKETING",
   },
-  {
-    name: "خضر أحمد",
-    role: "مسؤول متابعة الشؤون القانونية",
-    subtitle: "امتثال • تنظيم • متابعة قانونية",
-    imageCandidates: [FALLBACK_IMAGE],
-    tags: ["Legal", "Compliance", "Regulation", "Governance"],
-    accent: "navy",
-    badge: "LEGAL",
-  },
 ];
 
 /* =======================
    Control Room / Ops Team
-   ✅ folder in your public: /controlroom (NO hyphen)
 ======================= */
 const controlRoomTeam: Person[] = [
   {
@@ -363,13 +368,19 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
   const img0 = person.imageCandidates?.[0] || FALLBACK_IMAGE;
 
   return (
-    <article className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-6 shadow-2xl transition-all duration-300 hover:-translate-y-0.5">
+    <article
+      className={cx(
+        "group relative overflow-hidden rounded-3xl border bg-gradient-to-b from-white/10 to-white/5 p-6 shadow-2xl transition-all duration-300 hover:-translate-y-0.5",
+        person.frame === "gold"
+          ? "border-[#D4AF37]/60 shadow-[0_0_0_1px_rgba(212,175,55,0.28)]"
+          : "border-white/10"
+      )}
+    >
       <div className="absolute right-5 top-5 z-10">
         <RoleBadge text={person.badge} accent={accent} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-[180px_1fr]">
-        {/* Image */}
         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-black/20">
           <img
             src={safeUri(img0)}
@@ -380,7 +391,6 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
               const img = e.target as HTMLImageElement;
               const list = person.imageCandidates?.length ? person.imageCandidates : [FALLBACK_IMAGE];
 
-              // Use pathname to avoid domain/protocol differences
               let currentPath = "";
               try {
                 currentPath = new URL(img.src).pathname;
@@ -396,7 +406,6 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
           />
         </div>
 
-        {/* Content */}
         <div className="flex flex-col">
           <h3 className="text-xl font-bold text-white">{person.name}</h3>
           <p className="text-sm text-white/60">{person.role}</p>
@@ -404,10 +413,7 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
 
           <div className="mt-4 flex flex-wrap gap-2">
             {person.tags.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] text-white/70"
-              >
+              <span key={t} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] text-white/70">
                 {t}
               </span>
             ))}
@@ -424,7 +430,6 @@ function PlayerCard({ person, variant }: { person: Person; variant: "founder" | 
             </div>
           )}
 
-          {/* Actions */}
           <div className="mt-auto flex flex-wrap gap-3 pt-6">
             <a
               href={cvHref ? safeUri(cvHref) : "#"}
@@ -487,9 +492,10 @@ export default function TeamShowcaseSection() {
       <div className="relative mx-auto max-w-6xl px-5">
         <h2 className="mb-16 text-center text-4xl font-extrabold md:text-6xl">المؤسس والفِرق الرئيسية</h2>
 
-        {/* Founder */}
-        <div className="mb-12">
+        {/* Founder Row */}
+        <div className="mb-12 grid gap-6 md:grid-cols-2">
           <PlayerCard person={founder} variant="founder" />
+          <PlayerCard person={coFounder} variant="founder" />
         </div>
 
         {/* Tech */}
@@ -506,7 +512,7 @@ export default function TeamShowcaseSection() {
         {/* Management */}
         <SectionHeader
           title="فريق الإدارة"
-          subtitle="إدارة التشغيل والتنفيذ المالي والتسويق والتنسيق لضمان نمو المنصة واستمراريتها."
+          subtitle="إدارة التشغيل والتنفيذ والتسويق لضمان نمو المنصة واستمراريتها."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {managementTeam.map((p) => (
