@@ -313,7 +313,7 @@ const controlRoomTeam: Person[] = [
   {
     name: "اشرف فرج",
     role: "مشرف الكنترول روم",
-    subtitle: "تشغيل بث • متابعة عمليات • دعم فوري",
+    subtitle: "متابعة عمليات • دعم فوري",
     imageCandidates: [FALLBACK_IMAGE],
     tags: ["Control Room", "Operations"],
     accent: "emerald",
