@@ -523,7 +523,7 @@ export default function TeamShowcaseSection() {
         {/* Control Room */}
         <SectionHeader
           title="الكنترول روم وفريق التشغيل"
-          subtitle="صور أشرف وموسى غير متوفرة حاليًا — صورة هيثم مربوطة باسمه الحقيقي من مجلد controlroom."
+          subtitle="مراقبة أداء المنصة والبرمجيات، تشغيل المزادات المباشرة، وضمان سلاسة البث وجودة التنفيذ في الوقت الفعلي."
         />
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
